@@ -240,4 +240,30 @@ def player_stats(name):
     raise Exception("no such player")
 
 def average_rebounds_by_shoe_brand():
-    pass
+    brands_and_rebounds = []
+    brands = []
+    for player in players:
+        brands.append(player['shoe_brand'])
+    brands = list(set(brands))
+    for brand in brands:
+        rebounds_list = []
+        brand_dict = {}
+        for player in players:
+            if player['shoe_brand'] == brand:
+                rebounds_list.append(player['rebounds_per_game'])
+                # f"{number:.1f}"
+                average_rebounds = f"{sum(rebounds_list)/len(rebounds_list):.2f}"
+        brand_dict.update( {brand : average_rebounds})
+        brands_and_rebounds.append(brand_dict)
+    sorted_brands_and_rebounds = sorted(brands_and_rebounds, key=lambda one_dict: float(list(one_dict.values())[0]))
+    # print(brands_and_rebounds)
+    # print(sorted_brands_and_rebounds)
+    # brands_and_rebounds_dict = {}
+    output = []
+    for one_dict in sorted_brands_and_rebounds:
+        # brands_and_rebounds_dict.update({list(one_dict.keys())[0] : list(one_dict.values())[0]})
+        # print(str(list(one_dict.keys())[0]) + ": " + str(list(one_dict.values())[0]))
+        output.append(str(list(one_dict.keys())[0]) + ":  " + str(list(one_dict.values())[0]))
+    print(f'{output[1]}\n{output[2]}\n{output[3]}\n{output[0]}')
+        
+
