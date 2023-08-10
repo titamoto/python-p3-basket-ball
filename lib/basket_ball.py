@@ -182,3 +182,62 @@ def game_dict():
             ]
         }
     }
+
+game = game_dict()
+
+def teams():
+    teams = []
+    for  team in game:
+        teams.append(game[team])
+    return teams
+
+teams = teams()
+
+def all_players():
+    players_list = []
+    for home_or_away in game:
+        players_list.append(game[home_or_away]['players'])
+    return players_list[0] + players_list[1]
+
+players = all_players()
+
+def num_points_per_game(name):
+    for player in players:
+        if player['name'] == name:
+            return player['points_per_game']
+    raise Exception("no such player")
+
+def player_age(name):
+    for player in players:
+        if player['name'] == name:
+            return player['age']
+    raise Exception("no such player")
+
+def team_colors(team_name):
+    for team in teams:
+        if team['team_name'] == team_name:
+            return team['colors']
+    raise Exception("no such team")
+
+def team_names():
+    team_names = [teams[0]["team_name"], teams[1]["team_name"]]
+    return team_names
+
+# team_names = [teams[0]["team_name"], teams[1]["team_name"]]
+
+def player_numbers(team_name):
+    numbers = []
+    for team in teams:
+        if team['team_name'] == team_name:
+            for player in team['players']:
+                numbers.append(player['number'])
+            return numbers
+        
+def player_stats(name):
+    for player in players:
+        if player['name'] == name:
+            return player
+    raise Exception("no such player")
+
+def average_rebounds_by_shoe_brand():
+    pass
